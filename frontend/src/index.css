@@ -1,0 +1,121 @@
+@import "tailwindcss";
+
+/*
+  Regra 60-30-10
+  60% -> fundo escuro   (base #0A1A2F / ink #0b111a)
+  30% -> superfícies    (surface #132338)
+  10% -> destaque       (accent #FFB020: ações principais, alertas, status)
+*/
+@theme {
+  --color-ink: #0b111a;
+  --color-base: #0a1a2f;
+  --color-surface: #132338;
+  --color-surface-2: #1a2e48;
+  --color-line: #24405f;
+  --color-muted: #8ea3bf;
+  --color-text: #e6edf7;
+  --color-accent: #ffb020;
+  --color-accent-strong: #ffc54d;
+  --color-danger: #f25f5c;
+  --color-ok: #3dd68c;
+  --color-info: #5aa9ff;
+  --font-sans: "Inter", "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background-color: var(--color-base);
+  color: var(--color-text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-line) transparent;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+input[type="color"] {
+  -webkit-appearance: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+}
+input[type="color"]::-webkit-color-swatch-wrapper {
+  padding: 0;
+}
+input[type="color"]::-webkit-color-swatch {
+  border: none;
+  border-radius: 9999px;
+}
+
+select option {
+  background: var(--color-surface);
+  color: var(--color-text);
+}
+
+/* ---------------- Romaneio A4 ---------------- */
+.print-page {
+  background: #fff;
+  color: #000;
+  width: 210mm;
+  min-height: 297mm;
+  margin: 0 auto;
+  padding: 10mm;
+  box-sizing: border-box;
+  font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.avoid-break {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 8mm;
+  }
+  html,
+  body,
+  #root {
+    background: #fff !important;
+    color: #000 !important;
+    height: auto !important;
+  }
+  .no-print {
+    display: none !important;
+  }
+  .print-page {
+    width: auto;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    box-shadow: none !important;
+  }
+  .print-page thead {
+    display: table-header-group;
+  }
+  .print-page tr {
+    break-inside: avoid;
+    page-break-inside: avoid;
+  }
+  * {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+}
